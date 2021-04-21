@@ -22,11 +22,15 @@ public:
           bool rushed, bool insured);
   ~Parcel ();
 
-  //virtual double getCost () const = 0;
-  //virtual int getTravelTime () const = 0;
+  virtual int getWeight () const;
+  virtual double getCost () const = 0;
+  virtual int getTravelTime () const = 0;
 
-  //virtual Parcel& addRushed () = 0;
-  //virtual Parcel& addInsurance () = 0;
+  virtual bool isRushed () const;
+  virtual bool isInsured () const;
+
+  virtual Parcel& addRush ();
+  virtual Parcel& addInsurance ();
 
   virtual bool read (istream& rcIn);
   virtual void print (ostream& rcOut) const;

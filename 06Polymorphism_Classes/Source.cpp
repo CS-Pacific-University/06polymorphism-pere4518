@@ -7,7 +7,7 @@
 // Purpose:       Break up a program into well-defined functions, build a class
 //                heirarchy to demonstrate use of polymorphisim, virtual
 //                functions, and dynamic memory.
-// Hours Worked:  1 hours, 37 minutes
+// Hours Worked:  3 hours, 43 minutes
 //*****************************************************************************
 
 #include <iostream>
@@ -39,15 +39,17 @@ void getMenuChoice (char& rChoice);
 int main() {
   const string TITLE = "Mail Simulator!";
 
-  Parcel cTest1 (01, "ME", "YOU", 10, 10, false, false);
-  Parcel cTest2;
-  Parcel* apcParcels[MAXIMUM];
+  Letter cTest1 (01, "ME", "YOU", 10, 10, false, false);
+  Letter cTest2();
+  //Parcel* apcParcels[MAXIMUM];
   ifstream inputFile;
   char menuChoice = '0';
 
   openFile (inputFile, TEXT_FILE);
 
   cout << TITLE << endl << endl;
+
+  cout << fixed << setprecision (2);
 
   do {
 
@@ -57,22 +59,26 @@ int main() {
 
     if (menuChoice == PRINT) {
 
+      cTest1.print (cout);
 
+      cout << endl;
 
     }
     else if (menuChoice == INSURE) {
 
+      cTest1.addInsurance ();
 
+      cout << "Added Insurance for $" << cTest1.INSURANCE_LETTER << endl;
 
     }
     else if (menuChoice == RUSH) {
 
-
+      cTest1.addRush ();
 
     }
     else if (menuChoice == DELIVER) {
 
-
+      cout << cTest1.getCost ();
 
     }
 

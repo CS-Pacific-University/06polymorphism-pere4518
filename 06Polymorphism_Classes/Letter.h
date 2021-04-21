@@ -17,9 +17,31 @@ using namespace std;
 class Letter : public Parcel {
 
 public:
+  Letter ();
+  Letter (int trackingNum, string to, string from, int weight, int distance, 
+          bool rushed, bool insured);
+  ~Letter ();
 
+  int getWeight () const;
+
+  double getCost () const;
+  int getTravelTime () const;
+
+  bool isRushed () const;
+  bool isInsured () const;
+
+  Parcel& addRush ();
+  Parcel& addInsurance ();
+
+  virtual bool read (istream& rcIn);
+  virtual void print (ostream& rcOut) const;
+
+  const double COST_LETTER = 0.45;
+  const double INSURANCE_LETTER = 0.45;
+  const double RUSH_LETTER = 0.10;
 
 private:
+  const int TRAVEL_PER_DAY_LETTER = 100;
 
 };
 

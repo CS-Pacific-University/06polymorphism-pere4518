@@ -53,6 +53,40 @@ Parcel::~Parcel () {
   delete this;
 }
 
+int Parcel::getWeight () const {
+
+  return mWeight;
+
+}
+
+bool Parcel::isRushed () const {
+
+  return mRushed;
+
+}
+
+bool Parcel::isInsured () const {
+
+  return mInsured;
+
+}
+
+Parcel& Parcel::addRush () {
+
+  mRushed = true;
+
+  return *this;
+
+}
+
+Parcel& Parcel::addInsurance () {
+
+  mInsured = true;
+
+  return *this;
+
+}
+
 bool Parcel::read (istream& rcIn) {
 
   bool bIsRead = true;
