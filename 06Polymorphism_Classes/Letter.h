@@ -8,10 +8,13 @@
 //*****************************************************************************
 
 #pragma once
+#include "Parcel.h"
+#include <iostream>
+#include <string>
 
 using namespace std;
 
-class Letter {
+class Letter : public Parcel {
 
 public:
 

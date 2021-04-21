@@ -151,6 +151,9 @@
     <ClInclude Include="Parcel.h" />
     <ClInclude Include="Postcard.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="parcels.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
