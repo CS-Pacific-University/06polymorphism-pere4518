@@ -20,9 +20,9 @@ public:
   Letter ();
   Letter (int trackingNum, string to, string from, int weight, int distance, 
           bool rushed, bool insured);
-  ~Letter ();
 
   int getWeight () const;
+  int getDistance () const;
 
   double getCost () const;
   int getTravelTime () const;

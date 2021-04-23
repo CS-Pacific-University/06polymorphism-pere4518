@@ -19,11 +19,6 @@ Letter::Letter (int trackingNum, string to, string from, int weight, int distanc
 
 }
 
-Letter::~Letter () {
-
-  delete this;
-
-}
 
 int Letter::getWeight () const {
 
@@ -31,12 +26,15 @@ int Letter::getWeight () const {
 
 }
 
+int Letter::getDistance () const {
+
+  return Parcel::getDistance ();
+
+}
+
 double Letter::getCost () const {
 
   double cost = COST_LETTER * getWeight();
-
-  //bool bRush = isRushed;
-  //bool bInsure = isInsured;
 
   if (isRushed()) {
 
@@ -57,7 +55,18 @@ double Letter::getCost () const {
 
 int Letter::getTravelTime () const {
 
-  int travelTime = 0;
+  int minimumTravel = 1;
+  int travelTime = minimumTravel;
+  int distance = getDistance ();
+
+  travelTime = TRAVEL_PER_DAY_LETTER % distance;
+
+  if (isRushed () && travelTime > minimumTravel) {
+
+    travelTime -= 1;
+
+  }
+
 
   return travelTime;
 
@@ -93,7 +102,13 @@ Parcel& Letter::addInsurance () {
 
 bool Letter::read (istream& rcIn) {
 
-  bool bIsRead = false;
+  bool bIsRead = true;
+
+  if (!(Parcel::read (rcIn))) {
+
+    bIsRead = false;
+
+  }
 
   return bIsRead;
 

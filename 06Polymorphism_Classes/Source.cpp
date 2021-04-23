@@ -7,7 +7,7 @@
 // Purpose:       Break up a program into well-defined functions, build a class
 //                heirarchy to demonstrate use of polymorphisim, virtual
 //                functions, and dynamic memory.
-// Hours Worked:  3 hours, 43 minutes
+// Hours Worked:  4 hours, 57 minutes
 //*****************************************************************************
 
 #include <iostream>
@@ -41,15 +41,50 @@ int main() {
 
   Letter cTest1 (01, "ME", "YOU", 10, 10, false, false);
   Letter cTest2();
-  //Parcel* apcParcels[MAXIMUM];
-  ifstream inputFile;
+  Parcel *apcParcels[MAXIMUM] = {nullptr};
   char menuChoice = '0';
+  char ParcelType;
+  ifstream inputFile;
+  int numParcels = 0;
 
   openFile (inputFile, TEXT_FILE);
 
   cout << TITLE << endl << endl;
 
   cout << fixed << setprecision (2);
+
+  while (!(inputFile.eof ()) && numParcels < MAXIMUM) {
+
+    inputFile >> ParcelType;
+
+    if (ParcelType == LETTER) {
+
+      apcParcels[numParcels] = new Letter ();
+
+      apcParcels[numParcels]->read (inputFile);
+
+      numParcels++;
+
+    }
+    else if (ParcelType == POSTCARD) {
+
+      apcParcels[numParcels] = new Postcard ();
+
+      apcParcels[numParcels]->read (inputFile);
+
+      numParcels++;
+
+    }
+    else if (ParcelType == OVERNIGHT) {
+
+      apcParcels[numParcels] = new Overnight ();
+
+      apcParcels[numParcels]->read (inputFile);
+
+      numParcels++;
+
+    }
+  }
 
   do {
 

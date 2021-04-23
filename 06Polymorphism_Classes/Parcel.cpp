@@ -48,14 +48,15 @@ Parcel::Parcel (int trackingNum, string to, string from, int weight,
 
 }
 
-Parcel::~Parcel () {
-
-  delete this;
-}
-
 int Parcel::getWeight () const {
 
   return mWeight;
+
+}
+
+int Parcel::getDistance () const {
+
+  return mDistance;
 
 }
 
@@ -102,10 +103,8 @@ bool Parcel::read (istream& rcIn) {
 
 void Parcel::print (ostream& rcOut) const {
 
-  rcOut << mTrackingNum << ' ' 
-        << mTo << ' ' 
-        << mFrom << ' '
-        << mWeight << ' ' 
-        << mDistance << ' ';
+  rcOut << "TID: " << mTrackingNum << "\t"
+        << "From: " << mFrom << "\t"
+        << "To: " << mTo << "\t";
 
 }

@@ -20,9 +20,10 @@ public:
   Parcel ();
   Parcel (int trackingNum, string to, string from, int weight, int distance, 
           bool rushed, bool insured);
-  ~Parcel ();
 
   virtual int getWeight () const;
+  virtual int getDistance () const;
+
   virtual double getCost () const = 0;
   virtual int getTravelTime () const = 0;
 
