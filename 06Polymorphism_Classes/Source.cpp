@@ -7,7 +7,7 @@
 // Purpose:       Break up a program into well-defined functions, build a class
 //                heirarchy to demonstrate use of polymorphisim, virtual
 //                functions, and dynamic memory.
-// Hours Worked:  4 hours, 57 minutes
+// Hours Worked:  7 hours, 35 minutes
 //*****************************************************************************
 
 #include <iostream>
@@ -180,7 +180,7 @@ int main() {
 
   delete[] *apcParcels;
 
-  cout << "Reached the end!\n";
+  //cout << "Reached the end!\n";
   return EXIT_SUCCESS;
 }
 
