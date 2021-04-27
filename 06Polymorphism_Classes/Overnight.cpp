@@ -130,7 +130,13 @@ bool Overnight::read (istream& rcIn) {
 
   bool bIsRead = true;
 
-  if (!(Parcel::read (rcIn)) && rcIn >> mVolume) {
+  if (!(Parcel::read (rcIn))) {
+
+    bIsRead = false;
+
+  }
+
+  if (!(rcIn >> mVolume)) {
 
     bIsRead = false;
 

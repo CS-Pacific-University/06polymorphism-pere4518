@@ -40,7 +40,7 @@ double Postcard::getRush (double cost) const {
 
   double rush;
 
-  rush = cost + RUSH_POSTCARD;
+  rush = RUSH_POSTCARD;
 
   return rush;
 

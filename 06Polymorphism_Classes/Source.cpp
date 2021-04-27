@@ -36,16 +36,19 @@ void openFile (ifstream& rInputFile, string fileName);
 void printMenu ();
 void getMenuChoice (int& rChoice);
 void getParcelPosition (int& rParcel, int numParcels);
-void printAllParcels (Parcel* pcParcels[MAXIMUM], int numParcels);
+void printAllParcels (Parcel* apcParcels[MAXIMUM], int numParcels);
+double getFullCost (Parcel* pcParcel);
+bool isNullPointer (Parcel* pcParcel);
+void getParcel (Parcel* apcParcel[MAXIMUM], int numParcels, int& rParcel);
 
 int main() {
   const string TITLE = "Mail Simulator!";
 
   Letter cTest1 (01, "ME", "YOU", 10, 10, false, false);
-  Letter cTest2();
+  //Letter cTest2();
   Parcel *apcParcels[MAXIMUM] = {nullptr};
   char ParcelType;
-  double price;
+  double price = 0.00;
   ifstream inputFile;
   int numParcels = 0;
   int menuChoice = 0;
@@ -104,9 +107,13 @@ int main() {
     }
     else if (menuChoice == INSURE) {
 
-      getParcelPosition (parcelPosition, numParcels);
+      do {
 
-      parcelPosition--;
+        getParcelPosition (parcelPosition, numParcels);
+
+        parcelPosition--;
+
+      } while (isNullPointer (apcParcels[parcelChoice]));
 
       apcParcels[parcelPosition]->addInsurance ();
 
@@ -122,13 +129,44 @@ int main() {
     }
     else if (menuChoice == RUSH) {
 
-      cTest1.addRush ();
+      do {
 
+        getParcelPosition (parcelPosition, numParcels);
+
+        parcelPosition--;
+
+      } while (isNullPointer (apcParcels[parcelChoice]));
+
+      apcParcels[parcelPosition]->addRush ();
+
+      price = apcParcels[parcelPosition]->getCost ();
+
+      cout << "Added Rush for $"
+        << apcParcels[parcelPosition]->getRush (price) << endl;
+
+      apcParcels[parcelPosition]->print (cout);
+
+      cout << endl << endl;
     }
     else if (menuChoice == DELIVER) {
 
-      cout << cTest1.getCost ();
+      do {
 
+        getParcelPosition (parcelPosition, numParcels);
+
+        parcelPosition--;
+
+      } while (isNullPointer (apcParcels[parcelChoice]));
+
+      cout << "Delivered!" << endl
+        << apcParcels[parcelPosition]->getTravelTime () << " Day, $"
+        << getFullCost (apcParcels[parcelPosition]) << endl;
+
+      apcParcels[parcelPosition]->print (cout);
+
+      cout << endl << endl;
+
+      apcParcels[parcelPosition] = nullptr;
     }
 
   } while (menuChoice != QUIT);
@@ -139,6 +177,8 @@ int main() {
   //cTest2.print (cout);
 
   inputFile.close ();
+
+  delete[] *apcParcels;
 
   cout << "Reached the end!\n";
   return EXIT_SUCCESS;
@@ -196,16 +236,64 @@ void getParcelPosition (int& rParcel, int numParcels) {
 
 }
 
-void printAllParcels (Parcel* pcParcels[MAXIMUM], int numParcels) {
+void printAllParcels (Parcel* apcParcels[MAXIMUM], int numParcels) {
 
   for (int i = 0; i < numParcels; i++) {
 
-    pcParcels[i]->print (cout);
+    if (apcParcels[i]) {
 
-    cout << endl;
+      apcParcels[i]->print (cout);
+
+      cout << endl;
+
+    }
 
   }
 
   cout << endl;
+
+}
+
+double getFullCost (Parcel* pcParcel) {
+
+  double cost = pcParcel->getCost ();
+
+  if (pcParcel->isRushed ()) {
+
+    cost += pcParcel->getRush (cost);
+
+  }
+
+  if (pcParcel->isInsured ()) {
+
+    cost += pcParcel->getInsurance (cost);
+
+  }
+
+  return cost;
+}
+
+bool isNullPointer (Parcel* pcParcel) {
+
+  bool bIsNull = false;
+
+  if (pcParcel == nullptr) {
+
+    bIsNull = true;
+
+  }
+
+  return bIsNull;
+}
+
+void getParcel (Parcel* apcParcel[MAXIMUM], int numParcels, int& rParcel) {
+
+  do {
+
+    getParcelPosition (rParcel, numParcels);
+
+    rParcel--;
+
+  } while (isNullPointer (apcParcel[rParcel]));
 
 }

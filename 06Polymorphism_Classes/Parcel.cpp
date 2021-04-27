@@ -107,15 +107,15 @@ void Parcel::print (ostream& rcOut) const {
         << "From: " << mFrom << "\t"
         << "To: " << mTo << "\t";
 
-  if (mRushed) {
-
-    rcOut << "RUSH\t\t";
-
-  }
-
   if (mInsured) {
 
     rcOut << "INSURED\t\t";
+
+  }
+
+  if (mRushed) {
+
+    rcOut << "RUSH\t\t";
 
   }
 
