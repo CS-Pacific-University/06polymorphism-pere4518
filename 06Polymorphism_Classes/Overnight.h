@@ -24,6 +24,8 @@ public:
   int getWeight () const;
   int getDistance () const;
 
+  double getRush (double cost) const;
+  double getInsurance (double cost) const;
   double getCost () const;
   int getTravelTime () const;
 
@@ -36,12 +38,11 @@ public:
   virtual bool read (istream& rcIn);
   virtual void print (ostream& rcOut) const;
 
+private:
   const double COST_UNDER_100 = 12.00;
   const double COST_OVER_100 = 20.00;
   const double INSURANCE_OVERNIGHT = 0.25;
   const double RUSH_OVERNIGHT = 0.75;
-
-private:
   const int TRAVEL_PER_DAY_OVERNIGHT = 1000;
 
   int mVolume;

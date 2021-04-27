@@ -24,6 +24,8 @@ public:
   virtual int getWeight () const;
   virtual int getDistance () const;
 
+  virtual double getRush (double cost) const = 0;
+  virtual double getInsurance (double cost) const = 0;
   virtual double getCost () const = 0;
   virtual int getTravelTime () const = 0;
 

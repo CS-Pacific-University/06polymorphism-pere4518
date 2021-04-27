@@ -36,11 +36,29 @@ int Overnight::getDistance () const {
 
 }
 
+double Overnight::getRush (double cost) const {
+
+  double rush;
+
+  rush = cost * RUSH_OVERNIGHT;
+
+  return rush;
+
+}
+
+double Overnight::getInsurance (double cost) const {
+
+  double insurance;
+
+  insurance = cost * INSURANCE_OVERNIGHT;
+
+  return insurance;
+
+}
+
 double Overnight::getCost () const {
 
   double cost = 0.00;
-  double rush = 0.00;
-  double insure = 0.00;
 
   if (mVolume > 100) {
     //100 determines price
@@ -51,22 +69,6 @@ double Overnight::getCost () const {
   else {
 
     cost = COST_UNDER_100;
-
-  }
-
-  if (isRushed ()) {
-
-    rush = cost * RUSH_OVERNIGHT;
-
-    cost += rush;
-
-  }
-
-  if (isInsured ()) {
-
-    insure = cost * INSURANCE_OVERNIGHT;
-
-    cost += insure;
 
   }
 

@@ -11,7 +11,7 @@
 
 Postcard::Postcard () : Parcel() {
 
-  mMessage = "No Message";
+  mMessage = "   ";
 
 }
 
@@ -36,21 +36,29 @@ int Postcard::getDistance () const {
 
 }
 
+double Postcard::getRush (double cost) const {
+
+  double rush;
+
+  rush = cost + RUSH_POSTCARD;
+
+  return rush;
+
+}
+
+double Postcard::getInsurance (double cost) const {
+
+  double insurance;
+
+  insurance = INSURANCE_POSTCARD;
+
+  return insurance;
+
+}
+
 double Postcard::getCost () const {
 
   double cost = COST_POSTCARD;
-
-  if (isRushed ()) {
-
-    cost += RUSH_POSTCARD;
-
-  }
-
-  if (isInsured ()) {
-
-    cost += INSURANCE_POSTCARD;
-
-  }
 
   return cost;
 }
@@ -105,7 +113,13 @@ bool Postcard::read (istream& rcIn) {
 
   bool bIsRead = true;
 
-  if (!(Parcel::read (rcIn)) && rcIn >> mMessage) {
+  if (!(Parcel::read (rcIn))) {
+
+    bIsRead = false;
+
+  }
+
+  if (!(rcIn >> mMessage)) {
 
     bIsRead = false;
 

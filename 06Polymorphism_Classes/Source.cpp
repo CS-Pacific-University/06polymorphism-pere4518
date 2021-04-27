@@ -22,11 +22,11 @@
 using namespace std;
 
 const int MAXIMUM = 25;
-const char PRINT = '1';
-const char INSURE = '2';
-const char RUSH = '3';
-const char DELIVER = '4';
-const char QUIT = '5';
+const int PRINT = 1;
+const int INSURE = 2;
+const int RUSH = 3;
+const int DELIVER = 4;
+const int QUIT = 5;
 const char LETTER = 'L';
 const char POSTCARD = 'P';
 const char OVERNIGHT = 'O';
@@ -34,7 +34,9 @@ const string TEXT_FILE = "parcels.txt";
 
 void openFile (ifstream& rInputFile, string fileName);
 void printMenu ();
-void getMenuChoice (char& rChoice);
+void getMenuChoice (int& rChoice);
+void getParcelPosition (int& rParcel, int numParcels);
+void printAllParcels (Parcel* pcParcels[MAXIMUM], int numParcels);
 
 int main() {
   const string TITLE = "Mail Simulator!";
@@ -42,10 +44,13 @@ int main() {
   Letter cTest1 (01, "ME", "YOU", 10, 10, false, false);
   Letter cTest2();
   Parcel *apcParcels[MAXIMUM] = {nullptr};
-  char menuChoice = '0';
   char ParcelType;
+  double price;
   ifstream inputFile;
   int numParcels = 0;
+  int menuChoice = 0;
+  int parcelChoice = 0;
+  int parcelPosition;
 
   openFile (inputFile, TEXT_FILE);
 
@@ -94,16 +99,25 @@ int main() {
 
     if (menuChoice == PRINT) {
 
-      cTest1.print (cout);
-
-      cout << endl;
+      printAllParcels (apcParcels, numParcels);
 
     }
     else if (menuChoice == INSURE) {
 
-      cTest1.addInsurance ();
+      getParcelPosition (parcelPosition, numParcels);
 
-      cout << "Added Insurance for $" << cTest1.INSURANCE_LETTER << endl;
+      parcelPosition--;
+
+      apcParcels[parcelPosition]->addInsurance ();
+
+      price = apcParcels[parcelPosition]->getCost ();
+
+      cout << "Added Insurance for $" 
+           << apcParcels[parcelPosition]->getInsurance(price) << endl;
+
+      apcParcels[parcelPosition]->print (cout);
+
+      cout << endl << endl;
 
     }
     else if (menuChoice == RUSH) {
@@ -154,7 +168,7 @@ void printMenu () {
 
 }
 
-void getMenuChoice (char& rChoice) {
+void getMenuChoice (int& rChoice) {
 
   do {
 
@@ -166,5 +180,32 @@ void getMenuChoice (char& rChoice) {
 
   } while (rChoice != PRINT && rChoice != INSURE && rChoice != RUSH 
            && rChoice != DELIVER && rChoice != QUIT);
+
+}
+
+void getParcelPosition (int& rParcel, int numParcels) {
+
+  do {
+
+    cout << "TID> ";
+
+    cin >> rParcel;
+
+  } while (rParcel > numParcels && rParcel < 0);
+  // 0 for no parcels, minimum number to choose is 1
+
+}
+
+void printAllParcels (Parcel* pcParcels[MAXIMUM], int numParcels) {
+
+  for (int i = 0; i < numParcels; i++) {
+
+    pcParcels[i]->print (cout);
+
+    cout << endl;
+
+  }
+
+  cout << endl;
 
 }

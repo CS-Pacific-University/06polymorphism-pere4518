@@ -31,24 +31,29 @@ int Letter::getDistance () const {
   return Parcel::getDistance ();
 
 }
+double Letter::getRush (double cost) const {
+
+  double rush;
+
+  rush = cost * RUSH_LETTER;
+
+  return rush;
+
+}
+
+double Letter::getInsurance (double cost) const {
+
+  double insurance;
+
+  insurance = INSURANCE_LETTER;
+
+  return insurance;
+
+}
 
 double Letter::getCost () const {
 
   double cost = COST_LETTER * getWeight();
-
-  if (isRushed()) {
-
-    double rushRate = cost * RUSH_LETTER;
-
-    cost += rushRate;
-
-  }
-
-  if (isInsured()) {
-
-    cost += INSURANCE_LETTER;
-
-  }
   
   return cost;
 }

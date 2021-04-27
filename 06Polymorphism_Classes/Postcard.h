@@ -23,7 +23,9 @@ public:
 
   int getWeight () const;
   int getDistance () const;
-
+ 
+  double getRush (double cost) const;
+  double getInsurance (double cost) const;
   double getCost () const;
   int getTravelTime () const;
 
@@ -36,11 +38,10 @@ public:
   virtual bool read (istream& rcIn);
   virtual void print (ostream& rcOut) const;
 
+private:
   const double COST_POSTCARD = 0.15;
   const double INSURANCE_POSTCARD = 0.15;
   const double RUSH_POSTCARD = 0.25;
-
-private:
   const int TRAVEL_PER_DAY_POSTCARD = 10;
 
   string mMessage;
