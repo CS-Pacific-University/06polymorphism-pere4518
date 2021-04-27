@@ -7,7 +7,7 @@
 // Purpose:       Break up a program into well-defined functions, build a class
 //                heirarchy to demonstrate use of polymorphisim, virtual
 //                functions, and dynamic memory.
-// Hours Worked:  7 hours, 35 minutes
+// Hours Worked:  8 hours, 47 minutes
 //*****************************************************************************
 
 #include <iostream>
@@ -40,6 +40,16 @@ void printAllParcels (Parcel* apcParcels[MAXIMUM], int numParcels);
 double getFullCost (Parcel* pcParcel);
 bool isNullPointer (Parcel* pcParcel);
 void getParcel (Parcel* apcParcel[MAXIMUM], int numParcels, int& rParcel);
+
+//*****************************************************************************
+// Function:    main
+//
+// Description: Implements and executes code.
+//
+// Parameters:  None.
+//
+// Returned:    Return status.
+//*****************************************************************************
 
 int main() {
   const string TITLE = "Mail Simulator!";
@@ -184,6 +194,17 @@ int main() {
   return EXIT_SUCCESS;
 }
 
+//*****************************************************************************
+// Function:    openFile
+//
+// Description: Open a file and check if opened correctly.
+//
+// Parameters:  rInputFile - File to open.
+//              fileName   - Name of file to open.
+//
+// Returned:    Exit failure if not opened correctly, none otherwise.
+//*****************************************************************************
+
 void openFile (ifstream& rInputFile, string fileName) {
 
   rInputFile.open (fileName);
@@ -198,6 +219,16 @@ void openFile (ifstream& rInputFile, string fileName) {
 
 }
 
+//*****************************************************************************
+// Function:    printMenu
+//
+// Description: Print menu of choices for user to choose from.
+//
+// Parameters:  None.
+//
+// Returned:    None.
+//*****************************************************************************
+
 void printMenu () {
 
   cout << "1. Print All" << endl
@@ -207,6 +238,17 @@ void printMenu () {
        << "5. Quit" << endl << endl;
 
 }
+
+//*****************************************************************************
+// Function:    getMenuChoice
+//
+// Description: Get the user's choice from the menu, continues to ask for 
+//              choice if not a valid choice.
+//
+// Parameters:  rChoice - Choice the user inputs.
+//
+// Returned:    None.
+//*****************************************************************************
 
 void getMenuChoice (int& rChoice) {
 
@@ -223,6 +265,19 @@ void getMenuChoice (int& rChoice) {
 
 }
 
+//*****************************************************************************
+// Function:    getParcelPosition
+//
+// Description: Get a specific parcel from the user, will continue to ask if
+//              user inputs number less than 0 or higher than the amount of 
+//              parcels.
+//
+// Parameters:  rParcel    - User's input of parcel to choose.
+//              numParcels - Amount of parcels in an array to choose from.
+//
+// Returned:    None.
+//*****************************************************************************
+
 void getParcelPosition (int& rParcel, int numParcels) {
 
   do {
@@ -235,6 +290,17 @@ void getParcelPosition (int& rParcel, int numParcels) {
   // 0 for no parcels, minimum number to choose is 1
 
 }
+
+//*****************************************************************************
+// Function:    printAllParcels
+//
+// Description: Print all parcels in an array that aren't null pointers.
+//
+// Parameters:  apcParcels - Array of parcels to print out.
+//              numParcels - Amount of parcels in the array.
+//
+// Returned:    None.
+//*****************************************************************************
 
 void printAllParcels (Parcel* apcParcels[MAXIMUM], int numParcels) {
 
@@ -253,6 +319,17 @@ void printAllParcels (Parcel* apcParcels[MAXIMUM], int numParcels) {
   cout << endl;
 
 }
+
+//*****************************************************************************
+// Function:    getFullCost
+//
+// Description: Get the total cost of a parcel. If rushed and/or insured, will
+//              add to total cost.
+//
+// Parameters:  pcParcel - Parcel to get cost from.
+//
+// Returned:    Total cost of parcel.
+//*****************************************************************************
 
 double getFullCost (Parcel* pcParcel) {
 
@@ -273,6 +350,16 @@ double getFullCost (Parcel* pcParcel) {
   return cost;
 }
 
+//*****************************************************************************
+// Function:    isNullPointer
+//
+// Description: Check if a parcel is a null pointer.
+//
+// Parameters:  pcParcel - Parcel to check for null.
+//
+// Returned:    True if parcel is a null pointer, false otherwise.
+//*****************************************************************************
+
 bool isNullPointer (Parcel* pcParcel) {
 
   bool bIsNull = false;
@@ -285,6 +372,20 @@ bool isNullPointer (Parcel* pcParcel) {
 
   return bIsNull;
 }
+
+//*****************************************************************************
+// Function:    getParcel
+//
+// Description: Uses getParcelPosition and isNullPointer to check if a specific
+//              parcel in an array is a null pointer, will continue to ask if
+//              parcel is null.
+//
+// Parameters:  apcParcels - Array of pointers to parcels.
+//              numParcels - Amount of parcels in the array.
+//              rParcel    - User's input of parcel to choose.
+//
+// Returned:    None.
+//*****************************************************************************
 
 void getParcel (Parcel* apcParcel[MAXIMUM], int numParcels, int& rParcel) {
 
