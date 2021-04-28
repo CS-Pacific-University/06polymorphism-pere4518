@@ -7,7 +7,7 @@
 // Purpose:       Break up a program into well-defined functions, build a class
 //                heirarchy to demonstrate use of polymorphisim, virtual
 //                functions, and dynamic memory.
-// Hours Worked:  8 hours, 47 minutes
+// Hours Worked:  9 hours, 7 minutes
 //*****************************************************************************
 
 #include <iostream>
@@ -40,6 +40,7 @@ void printAllParcels (Parcel* apcParcels[MAXIMUM], int numParcels);
 double getFullCost (Parcel* pcParcel);
 bool isNullPointer (Parcel* pcParcel);
 void getParcel (Parcel* apcParcel[MAXIMUM], int numParcels, int& rParcel);
+int getDaysTraveled (Parcel* pcParcel);
 
 //*****************************************************************************
 // Function:    main
@@ -62,7 +63,6 @@ int main() {
   ifstream inputFile;
   int numParcels = 0;
   int menuChoice = 0;
-  int parcelChoice = 0;
   int parcelPosition;
 
   openFile (inputFile, TEXT_FILE);
@@ -117,13 +117,7 @@ int main() {
     }
     else if (menuChoice == INSURE) {
 
-      do {
-
-        getParcelPosition (parcelPosition, numParcels);
-
-        parcelPosition--;
-
-      } while (isNullPointer (apcParcels[parcelChoice]));
+      getParcel (apcParcels, numParcels, parcelPosition);
 
       apcParcels[parcelPosition]->addInsurance ();
 
@@ -139,17 +133,9 @@ int main() {
     }
     else if (menuChoice == RUSH) {
 
-      do {
-
-        getParcelPosition (parcelPosition, numParcels);
-
-        parcelPosition--;
-
-      } while (isNullPointer (apcParcels[parcelChoice]));
+      getParcel (apcParcels, numParcels, parcelPosition);
 
       apcParcels[parcelPosition]->addRush ();
-
-      price = apcParcels[parcelPosition]->getCost ();
 
       cout << "Added Rush for $"
         << apcParcels[parcelPosition]->getRush (price) << endl;
@@ -160,16 +146,10 @@ int main() {
     }
     else if (menuChoice == DELIVER) {
 
-      do {
-
-        getParcelPosition (parcelPosition, numParcels);
-
-        parcelPosition--;
-
-      } while (isNullPointer (apcParcels[parcelChoice]));
+      getParcel (apcParcels, numParcels, parcelPosition);
 
       cout << "Delivered!" << endl
-        << apcParcels[parcelPosition]->getTravelTime () << " Day, $"
+        << getDaysTraveled(apcParcels[parcelPosition]) << " Day, $"
         << getFullCost (apcParcels[parcelPosition]) << endl;
 
       apcParcels[parcelPosition]->print (cout);
@@ -396,5 +376,23 @@ void getParcel (Parcel* apcParcel[MAXIMUM], int numParcels, int& rParcel) {
     rParcel--;
 
   } while (isNullPointer (apcParcel[rParcel]));
+
+}
+
+//*****************************************************************************
+// Function:    getDaysTraveled
+//
+// Description: Get the days traveled of a parcel.
+//
+// Parameters:  pcParcel - Parcel to get days traveled from.
+//
+// Returned:    Days traveled of parcel.
+//*****************************************************************************
+
+int getDaysTraveled (Parcel* pcParcel) {
+
+  int days = pcParcel->getTravelTime ();
+
+  return days;
 
 }
