@@ -7,7 +7,7 @@
 // Purpose:       Break up a program into well-defined functions, build a class
 //                heirarchy to demonstrate use of polymorphisim, virtual
 //                functions, and dynamic memory.
-// Hours Worked:  9 hours, 7 minutes
+// Hours Worked:  9 hours, 35 minutes
 //*****************************************************************************
 
 #include <iostream>
