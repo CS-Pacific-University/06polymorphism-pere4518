@@ -41,6 +41,10 @@ double getFullCost (Parcel* pcParcel);
 bool isNullPointer (Parcel* pcParcel);
 void getParcel (Parcel* apcParcel[MAXIMUM], int numParcels, int& rParcel);
 int getDaysTraveled (Parcel* pcParcel);
+void printParcel (Parcel* pcParcel);
+double getRush (Parcel* pcParcel, double price);
+double getInsurance (Parcel* pcParcel, double price);
+double getCost (Parcel* pcParcel);
 
 //*****************************************************************************
 // Function:    main
@@ -121,12 +125,12 @@ int main() {
 
       apcParcels[parcelPosition]->addInsurance ();
 
-      price = apcParcels[parcelPosition]->getCost ();
+      price = getCost (apcParcels[parcelPosition]);
 
       cout << "Added Insurance for $" 
-           << apcParcels[parcelPosition]->getInsurance(price) << endl;
+           << getInsurance(apcParcels[parcelPosition], price) << endl;
 
-      apcParcels[parcelPosition]->print (cout);
+      printParcel (apcParcels[parcelPosition]);
 
       cout << endl << endl;
 
@@ -137,10 +141,12 @@ int main() {
 
       apcParcels[parcelPosition]->addRush ();
 
-      cout << "Added Rush for $"
-        << apcParcels[parcelPosition]->getRush (price) << endl;
+      price = getCost(apcParcels[parcelPosition]);
 
-      apcParcels[parcelPosition]->print (cout);
+      cout << "Added Rush for $"
+           << getRush(apcParcels[parcelPosition], price) << endl;
+
+      printParcel (apcParcels[parcelPosition]);
 
       cout << endl << endl;
     }
@@ -152,7 +158,7 @@ int main() {
         << getDaysTraveled(apcParcels[parcelPosition]) << " Day, $"
         << getFullCost (apcParcels[parcelPosition]) << endl;
 
-      apcParcels[parcelPosition]->print (cout);
+      printParcel (apcParcels[parcelPosition]);
 
       cout << endl << endl;
 
@@ -395,4 +401,84 @@ int getDaysTraveled (Parcel* pcParcel) {
 
   return days;
 
+}
+
+//*****************************************************************************
+// Function:    printParcel
+//
+// Description: Call print function for parcel. To stop "Dereferencing NULL
+//              pointer" warning in main as well.
+//
+// Parameters:  pcParcel - Parcel to print.
+//
+// Returned:    None.
+//*****************************************************************************
+
+void printParcel (Parcel* pcParcel) {
+
+  pcParcel->print (cout);
+
+}
+
+//*****************************************************************************
+// Function:    getRush
+//
+// Description: Call getRush function for parcel. To stop "Dereferencing NULL
+//              pointer" warning in main as well.
+//
+// Parameters:  pcParcel - Parcel to rush.
+//              price    - Price of parcel.
+//
+// Returned:    Rush price.
+//*****************************************************************************
+
+double getRush (Parcel* pcParcel, double price) {
+
+  double rush;
+
+  rush = pcParcel->getRush (price);
+
+  return rush;
+}
+
+//*****************************************************************************
+// Function:    getInsurance
+//
+// Description: Call getInsurance function for parcel. To stop "Dereferencing 
+//              NULL pointer" warning in main as well.
+//
+// Parameters:  pcParcel - Parcel to insure.
+//              price    - Price of parcel.
+//
+// Returned:    Insurance price.
+//*****************************************************************************
+
+double getInsurance (Parcel* pcParcel, double price) {
+
+  double insure;
+
+  insure = pcParcel->getInsurance (price);
+
+  return insure;
+}
+
+//*****************************************************************************
+// Function:    getCost
+//
+// Description: Call getCost function for parcel. To stop "Dereferencing NULL
+//              pointer" warning in main as well.
+//
+// Parameters:  pcParcel - Parcel to get cost of.
+//              price    - Price of parcel.
+//
+// Returned:    Price of parcel.
+//*****************************************************************************
+
+double getCost (Parcel* pcParcel) {
+
+  double cost;
+
+  cost = pcParcel->getCost ();
+
+  return cost;
 }
